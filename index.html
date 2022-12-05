@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate points gradient</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="colorpicker/colorpicker.js"></script>
+    <link rel="stylesheet" href="colorpicker/style.css">
+
+    <script src="app.js" defer></script>
+
+</head>
+<body>
+    <div class="panel">
+        <div class="panel-header">
+            <button class="panel-toggle">Toggle pannel</button>
+            <button class="panel-code">Show code</button>
+        </div>
+        <div class="panel-row">
+            <div class="panel-color panel-main-color"><span>bg</span></div>
+            <button class="panel-main-color-clear">Make transparent</button>
+        </div>
+        <div class="panel-footer">
+            <button class="panel-add" id="panelAdd">Dodaj</button>
+        </div>
+        <div class="panel-list">
+        </div>
+    </div>
+
+    <button class="toggle-dots">Toggle dots</button>
+
+    <div class="canvas">
+
+    </div>
+
+    <div class="popup">
+        <div class="popup-container">
+            <div class="popup-close">Close</div>
+            <div class="popup-code"></div>
+            <div class="popup-footer">
+                <button class="popup-btn">Copy to clipboard</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
