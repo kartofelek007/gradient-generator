@@ -32,6 +32,7 @@ function generatePanel() {
     }
 }
 
+
 /**
  * Generuje pojedynczy rząd panelu
  * @param {object} gradient
