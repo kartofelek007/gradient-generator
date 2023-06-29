@@ -81,13 +81,13 @@ function generatePanelRow(gradient) {
     );
     for (let input of inputs) {
         input.addEventListener('input', (e) => {
-            const gradient = storage.getGradientByNr(gradient.nr);
-            gradient[input.dataset.key] = +e.target.value;
+            const gradientToSet = storage.getGradientByNr(gradient.nr);
+            gradientToSet[input.dataset.key] = +e.target.value;
             if (input.dataset.key === 'x' || input.dataset.key === 'y') {
                 //const dot = DOM.canvas.querySelector(`.canvas-dot[data-nr="${obGradient.nr}"]`);
-                const dot = gradient.elements.dot;
-                dot.style.left = `${gradient.x}%`;
-                dot.style.top = `${gradient.y}%`;
+                const dot = gradientToSet.elements.dot;
+                dot.style.left = `${gradientToSet.x}%`;
+                dot.style.top = `${gradientToSet.y}%`;
             }
             canvas.setCanvasBg();
         });
