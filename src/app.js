@@ -6,3 +6,4 @@ import './_panel';
 import './_library';
 
 storage.setBgColor('transparent');
+document.body.classList.add('animation-init');

@@ -1,3 +1,8 @@
+/**
+ * Konwertuje hex na rgb
+ * @param {string} hex
+ * @returns
+ */
 export function hex2rgb(hex) {
     hex = parseInt(hex.indexOf('#') > -1 ? hex.substring(1) : hex, 16);
     return {
@@ -7,6 +12,13 @@ export function hex2rgb(hex) {
     };
 }
 
+/**
+ * Konwertuje rgb na hsl
+ * @param {number} r
+ * @param {number} g
+ * @param {number} b
+ * @returns
+ */
 export function rgb2hsl(r, g, b) {
     (r /= 255), (g /= 255), (b /= 255);
     let max = Math.max(r, g, b),

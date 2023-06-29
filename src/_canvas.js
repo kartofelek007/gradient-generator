@@ -11,11 +11,11 @@ const DOM = {};
 DOM.dotsToggle = document.querySelector('.panel-toggle-dots');
 DOM.canvas = document.querySelector('.canvas');
 
+/**
+ * ustawia tło płótna
+ */
 function setCanvasBg() {
-    document.body.classList.toggle(
-        'transparent-color',
-        storage.current.bgColor === null
-    );
+    document.body.classList.toggle('transparent-color', storage.current.bgColor === null);
     const gradient = generateGradient(
         storage.current.gradients,
         storage.current.bgColor
@@ -23,17 +23,25 @@ function setCanvasBg() {
     DOM.canvas.style.background = gradient;
 }
 
-function generateDot(data) {
+/**
+ * Tworzy pojedynczą kropkę na płótnie
+ * @param {singleGradientObject} gradient
+ * @returns HTMLElement
+ */
+function generateDot(gradient) {
     const dot = document.createElement('div');
     dot.classList.add('canvas-dot');
-    dot.dataset.nr = data.nr;
-    dot.dataset.text = data.nr + 1;
-    dot.style.left = `${data.x}%`;
-    dot.style.top = `${data.y}%`;
+    dot.dataset.nr = gradient.nr;
+    dot.dataset.text = gradient.nr + 1;
+    dot.style.left = `${gradient.x}%`;
+    dot.style.top = `${gradient.y}%`;
     DOM.canvas.append(dot);
     return dot;
 }
 
+/**
+ * Tworzy wszystkie kropki na płótnie
+ */
 function generateDots() {
     DOM.canvas.innerHTML = '';
     for (let el of storage.current.gradients) {
@@ -42,6 +50,10 @@ function generateDots() {
     }
 }
 
+/**
+ * Usuwa kropkę dla gradientu o danym numerze
+ * @param {nrGradientu} nr
+ */
 function deleteDot(nr) {
     const gradient = getGradientByNr(nr);
     gradient.elements.dot.remove();

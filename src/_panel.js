@@ -21,6 +21,9 @@ DOM.panelToggle = document.querySelector('.panel-toggle');
 DOM.panelCode = document.querySelector('.panel-code');
 DOM.panelBgColorClear = document.querySelector('.panel-bg-color-clear');
 
+/**
+ * generuje cały panel (wszystkie rzędy)
+ */
 function generatePanel() {
     DOM.panelList.innerHTML = '';
     for (let el of storage.current.gradients) {
@@ -29,47 +32,40 @@ function generatePanel() {
     }
 }
 
-function generatePanelRow(obGradient) {
+/**
+ * Generuje pojedynczy rząd panelu
+ * @param {object} gradient
+ * @returns HTMLElement
+ */
+function generatePanelRow(gradient) {
     const div = document.createElement('div');
     div.classList.add('panel-row');
-    div.dataset.nr = obGradient.nr;
-    const color = getColorOfGradient(obGradient, true);
+    div.dataset.nr = gradient.nr;
+    const color = getColorOfGradient(gradient, true);
 
     div.innerHTML = `
         <div class="panel-input-group panel-input-group-0">
-            <div class="panel-color" style="background-color: ${color}"><span>${
-        obGradient.nr + 1
-    }</span></div>
+            <div class="panel-color" style="background-color: ${color}"><span>${gradient.nr + 1}</span></div>
         </div>
         <div class="panel-input-group panel-input-group-1">
             <span class="panel-label">x</span>
-            <input class="panel-input-x" data-key="x" type="range" min="0" max="100" value="${
-                obGradient.x
-            }">
+            <input class="panel-input-x" data-key="x" type="range" min="0" max="100" value="${gradient.x}">
         </div>
         <div class="panel-input-group panel-input-group-2">
             <span class="panel-label">y</span>
-            <input class="panel-input-y" data-key="y" type="range" min="0" max="100" value="${
-                obGradient.y
-            }">
+            <input class="panel-input-y" data-key="y" type="range" min="0" max="100" value="${gradient.y}">
         </div>
         <div class="panel-input-group panel-input-group-3">
             <span class="panel-label">size</span>
-            <input class="panel-input-size" data-key="size" type="range" min="1" max="200" value="${
-                obGradient.size
-            }" />
+            <input class="panel-input-size" data-key="size" type="range" min="1" max="200" value="${gradient.size}" />
         </div>
         <div class="panel-input-group panel-input-group-4">
             <span class="panel-label">transparent</span>
-            <input class="panel-input-transparent" data-key="transparent" type="range" min="0" max="100" value="${
-                obGradient.transparent
-            }" />
+            <input class="panel-input-transparent" data-key="transparent" type="range" min="0" max="100" value="${gradient.transparent}" />
         </div>
         <div class="panel-input-group panel-input-group-6">
             <span class="panel-label">blur</span>
-            <input class="panel-input-blur" data-key="blur" type="range" min="0" max="100" value="${
-                obGradient.blur
-            }" />
+            <input class="panel-input-blur" data-key="blur" type="range" min="0" max="100" value="${gradient.blur}" />
         </div>
         <div class="panel-input-group panel-input-group-buttons panel-input-5">
             <button class="panel-row-up">up</button>
@@ -85,7 +81,7 @@ function generatePanelRow(obGradient) {
     );
     for (let input of inputs) {
         input.addEventListener('input', (e) => {
-            const gradient = storage.getGradientByNr(obGradient.nr);
+            const gradient = storage.getGradientByNr(gradient.nr);
             gradient[input.dataset.key] = +e.target.value;
             if (input.dataset.key === 'x' || input.dataset.key === 'y') {
                 //const dot = DOM.canvas.querySelector(`.canvas-dot[data-nr="${obGradient.nr}"]`);
@@ -106,7 +102,7 @@ function generatePanelRow(obGradient) {
     });
 
     const colorSelect = (color) => {
-        const gradient = storage.getGradientByNr(obGradient.nr);
+        const gradient = storage.getGradientByNr(gradient.nr);
         const rgb = hex2rgb(color);
         const hsl = rgb2hsl(rgb.r, rgb.g, rgb.b);
         const newColor = `hsla(${hsl[0] * 360}, ${hsl[1] * 100}%, ${
@@ -124,9 +120,9 @@ function generatePanelRow(obGradient) {
     cp.onColorSelect.on((color) => {
         colorSelect(color);
     });
-    // cp.onHueSelect.on(color => {
-    //     colorSelect(color);
-    // });
+    cp.onHueSelect.on(color => {
+        colorSelect(color);
+    });
     cp.onButtonClick.on((color) => {
         place.classList.toggle('is-show');
     });
@@ -140,15 +136,26 @@ function generatePanelRow(obGradient) {
     return div;
 }
 
+/**
+ * odznacza aktywy rząd (podczas przesuwania kropki na canvasie)
+ */
 function unselectActiveRow() {
     DOM.panel.querySelectorAll(`.panel-row`).forEach(row => row.classList.remove("panel-row-current"))
 }
 
+/**
+ * zaznacza aktywy rząd (podczas przesuwania kropki na canvasie)
+ * @param {obiect} gradient
+ */
 function selectActiveRow(gradient) {
     unselectActiveRow();
     gradient.elements.row.classList.add('panel-row-current');
 }
 
+/**
+ * Aktualizuje rząd dla danego gradientu
+ * @param {obiect} gradient
+ */
 function fillPanelRow(gradient) {
     const row = gradient.elements.row;
     row.querySelector('.panel-input-x').value = gradient.x.toFixed(2);
@@ -156,6 +163,10 @@ function fillPanelRow(gradient) {
     row.querySelector('.panel-input-size').value = gradient.size;
 }
 
+/**
+ * Ustawia kolor tła przycisku do wyboru tła całego płótna
+ * @param {string} color
+ */
 function setButtonBgBackground(color) {
     if (color === 'transparent') {
         DOM.placeBgColor.style.background = '';

@@ -19,6 +19,9 @@ DOM.popupClose.addEventListener('click', (e) => {
     DOM.popupBtn.classList.remove('is-copy');
 });
 
+/**
+ * pokazuje popup
+ */
 function showPopup() {
     DOM.popup.querySelector('.popup-code').innerHTML = bg;
     DOM.popup.classList.add('is-show');

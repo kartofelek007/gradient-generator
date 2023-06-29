@@ -1,6 +1,5 @@
 import { canvas } from './_canvas';
 import { events } from './_events';
-import { library } from './_library';
 import { panel } from './_panel';
 
 let currentId = 0;
@@ -10,14 +9,27 @@ let current = {
     gradients: [],
 };
 
+/**
+ * Pobiera z aktualnej kolekcji gradient o danym numerze
+ * @param {number} nr
+ * @returns
+ */
 function getGradientByNr(nr) {
     return current.gradients.find((el) => el.nr === +nr);
 }
 
+/**
+ * Pobiera kolor tła płótna
+ * @returns string
+ */
 function getCurrentBgColor() {
     return current.bgColor === null ? 'transparent' : current.bgColor;
 }
 
+/**
+ * Tworzy pojedynczy obiekt gradientu
+ * @returns gradientObject
+ */
 function generateNewGradientObj() {
     currentId++;
 
@@ -41,11 +53,19 @@ function generateNewGradientObj() {
     };
 }
 
+/**
+ * Przelicza numery gradientów w kolekcji
+ * @returns
+ */
 function recalculateGradientsNumbers() {
     return
     current.gradients.forEach((el, i) => (el.nr = i));
 }
 
+/**
+ * Usuwa z kolekcji gradient o danym numerze
+ * @param {number} nr
+ */
 function deleteGradient(nr) {
     current.gradients = current.gradients.filter((el) => el.nr !== nr);
     recalculateGradientsNumbers();
@@ -55,21 +75,21 @@ function deleteGradient(nr) {
     });
 }
 
-function addNewGradient(gradientData) {
-    let obGradient = null;
-    if (gradientData) {
-        obGradient = gradientData;
-    } else {
-        obGradient = storage.generateNewGradientObj();
-    }
-
+/**
+ * Dodaje nowy gradient do aktualnej kolekcji
+ * @param {*} gradient
+ */
+function addNewGradient(gradient) {
+    let obGradient = (gradient) ? gradient : storage.generateNewGradientObj();;
     current.gradients.push(obGradient);
-
     recalculateGradientsNumbers();
-
     events.addNewGradient.emit();
 }
 
+/**
+ * Ustawia kolor tła płótna
+ * @param {string} color
+ */
 function setBgColor(color) {
     current.bgColor = color === 'transparent' ? null : color;
     events.setBg.emit(color);
