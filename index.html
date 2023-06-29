@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Gradient generator</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <script src="./src/app.js" type="module"></script>
+</head>
+<body>
+    <div class="panel">
+        <div class="panel-header">
+            <button class="panel-code" title="Show code">Show code</button>
+            <button class="panel-toggle-dots" hidden>Toggle dots</button>
+        </div>
+        <div class="panel-row panel-row-color">
+            <div class="panel-color panel-bg-color" title="Set bg color"><span>bg</span><b></b></div>
+            <button class="panel-bg-color-clear" hidden title="Remove bg color">Make transparent</button>
+        </div>
+        <div class="panel-row-add">
+            <button class="panel-add" id="panelAdd">Dodaj</button>
+            <button class="panel-toggle" hidden title="Show/hide panel">Toggle panel</button>
+        </div>
+        <div class="panel-list">
+        </div>
+    </div>
+
+    <div class="canvas">
+
+    </div>
+
+
+    <div class="library">
+        <button class="btn-show-library">Show library</button>
+        <button class="library-btn-save">Save current work to local library</button>
+        <div class="library-list"></div>
+    </div>
+
+    <div class="popup">
+        <div class="popup-container">
+            <div class="popup-close">Close</div>
+            <div class="popup-code"></div>
+            <div class="popup-footer">
+                <button class="popup-btn">Copy to clipboard</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

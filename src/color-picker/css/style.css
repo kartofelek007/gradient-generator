@@ -1,0 +1,158 @@
+.color {
+    width: 300px;
+    background: #fff;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    padding: 5px;
+    box-sizing: border-box;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+        "hue hue"
+        "picker picker"
+        "input button"
+        "library library";
+}
+.color * {
+    box-sizing: border-box;
+}
+.color-hue {
+    height: 10px;
+    position: relative;
+    margin-top: 5px;
+    grid-area: hue;
+}
+.color-hue-canvas {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 0;
+    background: linear-gradient(to right, red 0%, #ff0 17%, lime 33%, cyan 50%, blue 66%, #f0f 83%, red 100%);
+    background: red;
+}
+.color-hue-drag {
+    width: 10px;
+    border-radius: 2px;
+    background: red;
+    box-shadow: inset 0 0 0 2px #fff;
+    height: 20px;
+    border: 1px solid #555;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+.color-canvas {
+    grid-area: picker;
+    position: relative;
+    margin-top: 5px;
+    height: 150px;
+    /* box-shadow: 0 0 0 1px #eee; */
+}
+.color-canvas-drag {
+    width: 15px;
+    height: 15px;
+    border-radius: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 0 2px #fff, 0 0 2px #000;
+    background: transparent;
+    z-index: 1;
+    pointer-events: none;
+}
+.color-canvas-canvas {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    /*box-shadow:  0 0 0 1px #eee;*/
+}
+
+.color-input {
+    grid-area: input;
+    padding: 10px 5px;
+    height: 25px;
+    border: 1px solid #ddd;
+    font-family: sans-serif;
+}
+.color-btn {
+    grid-area: button;
+    background: #eee;
+    color: #333;
+    font-size: 11px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 2px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+.color-btn:hover {
+    background-color: #dfdfdf;
+}
+
+.color-library {
+    grid-area: library;
+    display: flex;
+    gap: 8px;
+    border-top: 1px solid #eee;
+    margin-left: -5px;
+    margin-right: -5px;
+    padding: 5px 5px 0;
+    min-height: 30px;
+}
+.color-library-add {
+    background: #eee;
+    color: #333;
+    font-size: 11px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 2px;
+    min-width: 30px;
+    min-height: 30px;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus' viewBox='0 0 16 16'%3E  %3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'%3E%3C/path%3E%3C/svg%3E");
+    background-position: center;
+    background-size: no-repeat;
+    background-repeat: no-repeat;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+.color-library-add:hover {
+    background-color: #dfdfdf;
+}
+.color-library-colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
+}
+.color-library-el {
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+}
+.color-library-el-delete {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: -2px;
+    top: -2px;
+    cursor: pointer;
+    border: 0;
+    text-indent: -999px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 0 1px #ddd;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-x' viewBox='0 0 16 16'%3E  %3Cpath d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'%3E%3C/path%3E%3C/svg%3E");
+    background-position: center;
+}
