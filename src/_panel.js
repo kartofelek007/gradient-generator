@@ -175,7 +175,7 @@ function setButtonBgBackground(color) {
         DOM.placeBgColor.style.background = color;
         DOM.placeBgColor.classList.remove('transparent-color');
     }
-    DOM.panelBgColorClear.hidden = storage.current.bgColor !== null;
+    DOM.panelBgColorClear.hidden = storage.current.bgColor === null;
 }
 
 const cp = new ColorPicker(DOM.placeBgColor, {
@@ -186,8 +186,7 @@ const cp = new ColorPicker(DOM.placeBgColor, {
 });
 cp.onColorSelect.on((color) => {
     DOM.placeBgColor.style.background = color;
-    storage.current.bgColor = color;
-    canvas.setCanvasBg();
+    storage.setBgColor(color);
 });
 cp.onButtonClick.on((color) => {
     DOM.placeBgColor.classList.toggle('is-show');

@@ -11,6 +11,7 @@ export class ColorPicker {
         this.onButtonClick = new PubSub();
         this.onColorSelect = new PubSub();
         this.onLibraryColorsChange = new PubSub();
+        this.onHueSelect = new PubSub();
 
         this.place = place; //miejsce do którego wstawimy nasz color-picker
         this.color = "#FF0000";
@@ -61,8 +62,10 @@ export class ColorPicker {
         });
 
         this.hue.onHueSelect.on(color => {
-            this.canvas.setBgGradient(rgb2hex(color.r, color.g, color.b));
+            const hex = rgb2hex(color.r, color.g, color.b);
+            this.canvas.setBgGradient(hex);
             this.canvas.updatePickerColor();
+            this.onHueSelect.emit(hex);
         });
 
         this.canvas.onColorSelect.on(color => {

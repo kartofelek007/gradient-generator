@@ -72,12 +72,12 @@ function loadGradientFromLibrary(id) {
         const clonedData = structuredClone(loadData);
         storage.current.gradients = clonedData.data;
         storage.setBgColor(clonedData.bgColor);
+        //muszę dodać dwa dodatkowe pola do każdego gradientu w kolekcji
         storage.current.gradients.forEach(
             (el) => (el.elements = { row: null, dot: null })
         );
         panel.generatePanel();
         canvas.generateDots();
-        canvas.setCanvasBg();
         storage.recalculateGradientsNumbers();
     }
 }
