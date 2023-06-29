@@ -1,17 +1,19 @@
 export function hex2rgb(hex) {
-    hex = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
+    hex = parseInt(hex.indexOf('#') > -1 ? hex.substring(1) : hex, 16);
     return {
         r: hex >> 16,
-        g: (hex & 0x00FF00) >> 8,
-        b: (hex & 0x0000FF)
+        g: (hex & 0x00ff00) >> 8,
+        b: hex & 0x0000ff,
     };
 }
 
 export function rgb2hsl(r, g, b) {
-    r /= 255, g /= 255, b /= 255;
+    (r /= 255), (g /= 255), (b /= 255);
     let max = Math.max(r, g, b),
         min = Math.min(r, g, b);
-    let h, s, l = (max + min) / 2;
+    let h,
+        s,
+        l = (max + min) / 2;
 
     if (max === min) {
         h = s = 0; // achromatic
