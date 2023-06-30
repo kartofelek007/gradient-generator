@@ -81,15 +81,51 @@ body {
     overflow: hidden;
 }
 
+body {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .transparent-color {
-    background-image: repeating-linear-gradient(90deg, hsla(196, 0%, 79%, 0.06) 0px, hsla(196, 0%, 79%, 0.06) 1px, transparent 1px, transparent 96px), repeating-linear-gradient(0deg, hsla(196, 0%, 79%, 0.06) 0px, hsla(196, 0%, 79%, 0.06) 1px, transparent 1px, transparent 96px), repeating-linear-gradient(0deg, hsla(196, 0%, 79%, 0.09) 0px, hsla(196, 0%, 79%, 0.09) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(90deg, hsla(196, 0%, 79%, 0.09) 0px, hsla(196, 0%, 79%, 0.09) 1px, transparent 1px, transparent 12px), linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255));
-    background-color: #eee;
+    --size: 15px;
+    --color: #eee;
+    --bg: #fff;
+    background: repeating-conic-gradient(var(--color) 0% 25%, var(--bg) 0% 50%) 50% 50% / var(--size) var(--size);
 }
 
 .canvas {
     width: 100%;
     height: 100%;
     position: relative;
+    resize: both;
+    overflow: auto;
+    border: 1px solid #aaa;
+    box-shadow: 0 2px 5px rgba(#000, 0.2);
+}
+
+.canvas-inside {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.canvas-inside::before {
+    content: attr(data-dimension);
+    font-size: 11px;
+    padding: 2px;
+    line-height: 1;
+    font-family: sans-serif;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    pointer-events: none;
+    color: #000;
+    background: rgba(#fff, 0.8);
+    font-weight: 600;
+    border-radius: 0 2px 0 0;
+    text-shadow: 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9);
 }
 
 .canvas-dot-moved {

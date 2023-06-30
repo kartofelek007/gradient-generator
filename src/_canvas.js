@@ -8,13 +8,14 @@ let dragElement = null;
 
 const DOM = {};
 DOM.dotsToggle = document.querySelector('.panel-toggle-dots');
-DOM.canvas = document.querySelector('.canvas');
+DOM.canvasCnt = document.querySelector('.canvas');
+DOM.canvas = document.querySelector('.canvas-inside');
 
 /**
  * ustawia tło płótna
  */
 function setCanvasBg() {
-    document.body.classList.toggle('transparent-color', storage.current.bgColor === null);
+    DOM.canvasCnt.classList.toggle('transparent-color', storage.current.bgColor === null);
     DOM.canvas.style.background = generateGradient(
         storage.current.gradients,
         storage.current.bgColor
@@ -56,6 +57,14 @@ function deleteDot(nr) {
     gradient.elements.dot.remove();
 }
 
+/**
+ * ustawia rozmiar płótna jako dataset
+ */
+function setDimension() {
+    DOM.canvas.dataset.dimension = `${DOM.canvas.offsetWidth}x${DOM.canvas.offsetHeight}`;
+}
+
+
 DOM.canvas.addEventListener('mouseup', () => {
     drag = false;
     panel.unselectActiveRow()
@@ -83,8 +92,8 @@ DOM.canvas.addEventListener('mousedown', (e) => {
 
 DOM.canvas.addEventListener('mousemove', (e) => {
     if (dragElement && drag) {
-        const x = (e.pageX / DOM.canvas.offsetWidth) * 100;
-        const y = (e.pageY / DOM.canvas.offsetHeight) * 100;
+        const x = (e.offsetX / DOM.canvas.offsetWidth) * 100;
+        const y = (e.offsetY / DOM.canvas.offsetHeight) * 100;
         const nr = +dragElement.dataset.nr;
         const gradient = storage.getGradientByNr(nr);
         dragElement.style.left = `${x}%`;
@@ -100,6 +109,9 @@ DOM.dotsToggle.addEventListener('click', (e) => {
     DOM.canvas.classList.toggle('canvas-dots-hide');
     e.target.classList.toggle('is-active');
 });
+
+//nasłuchiwanie zmiany rozmiarów płótna
+new ResizeObserver(setDimension).observe(DOM.canvas);
 
 events.deleteGradient.on(({gradientsCount, gradientCount}) => {
     generateDots();
