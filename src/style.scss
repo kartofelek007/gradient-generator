@@ -102,8 +102,7 @@ body {
     position: relative;
     resize: both;
     overflow: auto;
-    border: 1px solid #aaa;
-    box-shadow: 0 2px 5px rgba(#000, 0.2);
+    box-shadow: 0 0 0 1px #aaa, 0 2px 5px rgba(#000, 0.2);
 }
 
 .canvas-inside {
