@@ -23,4 +23,5 @@ export const events = {
     deleteGradient: new EventObserver(),
     setBg: new EventObserver(),
     addNewGradient: new EventObserver(),
+    clearAllWork: new EventObserver(),
 };

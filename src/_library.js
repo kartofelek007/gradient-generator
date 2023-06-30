@@ -76,6 +76,7 @@ function loadGradientFromLibrary(id) {
         storage.current.gradients.forEach(
             (el) => (el.elements = {row: null, dot: null})
         );
+        events.addNewGradient.emit();
         panel.generatePanel();
         canvas.generateDots();
         storage.recalculateGradientsNumbers();

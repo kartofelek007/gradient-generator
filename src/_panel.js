@@ -16,9 +16,10 @@ DOM.panel = document.querySelector('.panel');
 DOM.panelList = DOM.panel.querySelector('.panel-list');
 DOM.placeBgColor = DOM.panel.querySelector('.panel-bg-color');
 DOM.btnAdd = document.querySelector('#panelAdd');
-DOM.panelToggle = document.querySelector('.panel-toggle');
-DOM.panelCode = document.querySelector('.panel-code');
-DOM.panelBgColorClear = document.querySelector('.panel-bg-color-clear');
+DOM.btnPanelToggle = document.querySelector('.panel-toggle');
+DOM.btnShowPopup = document.querySelector('.panel-code');
+DOM.btnBgColorClear = document.querySelector('.panel-bg-color-clear');
+DOM.btnClearAll = document.querySelector(".panel-clear-all");
 
 /**
  * generuje cały panel (wszystkie rzędy)
@@ -159,6 +160,20 @@ function fillPanelRow(gradient) {
 }
 
 /**
+ * pokazuje / ukrywa przycisk czyszczenia płótna
+ */
+function setVisibilityBtnClearAll() {
+    DOM.btnClearAll.hidden = (storage.current.bgColor === null && !storage.current.gradients.length);
+}
+
+/**
+ * pokazuje / ukrywa przycisk do włączania krótkiego panelu
+ */
+function setVisibilityBtnPanelToggle() {
+    DOM.btnPanelToggle.hidden = storage.current.gradients.length === 0;
+}
+
+/**
  * Ustawia kolor tła przycisku do wyboru tła całego płótna
  * @param {string} color
  */
@@ -170,7 +185,7 @@ function setButtonBgBackground(color) {
         DOM.placeBgColor.style.background = color;
         DOM.placeBgColor.classList.remove('transparent-color');
     }
-    DOM.panelBgColorClear.hidden = storage.current.bgColor === null;
+    DOM.btnBgColorClear.hidden = storage.current.bgColor === null;
 }
 
 const cp = new ColorPicker(DOM.placeBgColor, {
@@ -273,7 +288,7 @@ DOM.panel.addEventListener('click', (e) => {
 
             const row = del.closest('.panel-row');
             const nr = +row.dataset.nr;
-            DOM.panelToggle.hidden = !storage.current.gradients.length;
+            DOM.btnPanelToggle.hidden = !storage.current.gradients.length;
             row.remove();
 
             Flip.from(state, {duration: 0.2});
@@ -290,11 +305,11 @@ DOM.btnAdd.addEventListener('click', () => {
     storage.recalculateGradientsNumbers();
 });
 
-DOM.panelToggle.addEventListener('click', () => {
+DOM.btnPanelToggle.addEventListener('click', () => {
     DOM.panel.classList.toggle('panel-mini');
 });
 
-DOM.panelCode.addEventListener('click', () => {
+DOM.btnShowPopup.addEventListener('click', () => {
     let bg;
     if (!storage.current.gradients.length) {
         bg = `background: ${storage.getCurrentBgColor()};`;
@@ -307,22 +322,36 @@ DOM.panelCode.addEventListener('click', () => {
     popup.showPopup(bg);
 });
 
-DOM.panelBgColorClear.addEventListener('click', () => {
+DOM.btnBgColorClear.addEventListener('click', () => {
     storage.setBgColor('transparent');
 });
 
+DOM.btnClearAll.addEventListener("click", () => {
+    if (confirm("Clear all current work?")) {
+        storage.current.gradients = [];
+        storage.setBgColor("transparent");
+        generatePanel();
+        canvas.generateDots();
+        canvas.setCanvasBg();
+        setVisibilityBtnPanelToggle()
+    }
+})
+
 events.deleteGradient.on(({gradientsCount, gradientCount}) => {
-    DOM.panelToggle.hidden = gradientsCount === 0;
+    setVisibilityBtnPanelToggle();
     generatePanel();
+    setVisibilityBtnClearAll();
 });
 
 events.setBg.on((color) => {
     setButtonBgBackground(color);
+    setVisibilityBtnClearAll();
 });
 
 events.addNewGradient.on((_) => {
     generatePanel();
-    DOM.panelToggle.hidden = !storage.current.gradients.length;
+    setVisibilityBtnPanelToggle();
+    setVisibilityBtnClearAll();
 });
 
 export const panel = {
