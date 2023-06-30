@@ -309,7 +309,7 @@ DOM.panelCode.addEventListener('click', (e) => {
             storage.getCurrentBgColor()
         )};`;
     }
-    popup.showPopup();
+    popup.showPopup(bg);
 });
 
 DOM.panelBgColorClear.addEventListener('click', (e) => {

@@ -15,14 +15,23 @@ DOM.popupBtn.addEventListener('click', (e) => {
 });
 
 DOM.popupClose.addEventListener('click', (e) => {
+    document.body.classList.remove("popup-show");
     DOM.popup.classList.remove('is-show');
     DOM.popupBtn.classList.remove('is-copy');
 });
 
+document.addEventListener("keyup", e => {
+    if (e.key === "Escape") {
+        DOM.popupClose.click();
+    }
+})
+
 /**
- * pokazuje popup
+ * Pokazuje popup z treścią gradientu
+ * @param {string} bg
  */
-function showPopup() {
+function showPopup(bg) {
+    document.body.classList.add("popup-show");
     DOM.popup.querySelector('.popup-code').innerHTML = bg;
     DOM.popup.classList.add('is-show');
 }
