@@ -1,0 +1,34 @@
+%colorSelector {
+    display: inline-block;
+    width: var(--input-size);
+    height: var(--input-size);
+    background-size: 8px 8px;
+    box-shadow: inset 0 0 0 2px black, 0 0 0 1px $colorShadow;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-size: 10px;
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+
+    & > span {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #000;
+        font-weight: bold;
+        text-shadow: 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9);
+        z-index: 1;
+    }
+}
+
+.color-select {
+    @extend %colorSelector;
+}

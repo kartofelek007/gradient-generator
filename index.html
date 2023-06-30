@@ -9,26 +9,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <script src="./src/app.js" type="module"></script>
+    <script src="./src/js/app.js" type="module"></script>
 </head>
 <body>
     <div class="panel">
         <div class="panel-header">
-            <button class="btn-code panel-code" title="Show code">Show code</button>
-            <button class="btn-help panel-help">Help</button>
-            <button class="btn-save-to-file panel-save-to-file" title="Download current gradient as PNG" hidden>Save to file</button>
+            <button class="btn-code panel-btn-code" title="Show code">Show code</button>
+            <button class="btn-help panel-btn-help">Help</button>
         </div>
-        <div class="panel-row panel-row-color">
-            <div class="btn-color-select panel-color panel-bg-color" title="Set bg color"><span>bg</span><b></b></div>
-            <button class="btn-delete panel-bg-color-clear" hidden title="Remove bg color">Make transparent</button>
+        <div class="panel-row panel-bg-row-color">
+            <div class="color-select panel-bg-color-select" title="Set bg color"><span>bg</span><b></b></div>
+            <button class="btn-delete panel-btn-bg-color-clear" hidden title="Remove bg color">Make transparent</button>
         </div>
         <div class="panel-row-add">
-            <button class="btn-add panel-add" id="panelAdd">Add gradient</button>
-            <button class="btn-toggle panel-toggle" hidden title="Show/hide panel">Toggle panel</button>
+            <button class="btn-add panel-btn-add" id="panelAdd">Add gradient</button>
+            <button class="btn-toggle panel-btn-toggle" hidden title="Show/hide panel">Toggle panel</button>
         </div>
         <div class="panel-list">
         </div>
-        <button class="btn-clear-all panel-clear-all" hidden title="Clear all work">Clear all</button>
+    </div>
+
+    <div class="panel-bottom">
+        <button class="btn-clear-all panel-btn-clear-all" hidden title="Clear all work">Clear all</button>
+        <button class="btn-save-to-file panel-btn-save-to-file" title="Download current gradient as PNG" hidden>Save to file</button>
     </div>
 
     <div class="canvas">
@@ -79,6 +82,8 @@
                 <p>
                     You can resize the canvas you are working on. To do this grab its bottom right corner. Saving the gradient to the library will save it along with the size of the canvas.
                 </p>
+
+                <p>After you create your gradient, you can save it to png by clicking <span class="btn-save-to-file"></span> button.</p>
 
                 <hr>
 

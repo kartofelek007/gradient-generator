@@ -1,0 +1,14 @@
+$inputSize: 30px;
+$colorShadow: rgba(#fff, 0.3);
+
+:root {
+    --input-size: #{$inputSize};
+
+    @media (max-width: 890px) {
+        --input-size: #{$inputSize - 3px};
+    }
+
+    @media (max-width: 700px) {
+        --input-size: #{$inputSize - 5px};
+    }
+}

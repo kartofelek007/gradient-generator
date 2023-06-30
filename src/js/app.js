@@ -1,4 +1,4 @@
-import './style.scss';
+import '../scss/style.scss';
 
 import { storage } from './_storage';
 import './_canvas';

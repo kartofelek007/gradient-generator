@@ -14,14 +14,14 @@ gsap.registerPlugin(Flip);
 const DOM = {};
 DOM.panel = document.querySelector('.panel');
 DOM.panelList = DOM.panel.querySelector('.panel-list');
-DOM.placeBgColor = DOM.panel.querySelector('.panel-bg-color');
+DOM.placeBgColor = DOM.panel.querySelector('.panel-bg-color-select');
 DOM.btnAdd = document.querySelector('#panelAdd');
-DOM.btnPanelToggle = document.querySelector('.panel-toggle');
-DOM.btnShowPopup = document.querySelector('.panel-code');
-DOM.btnBgColorClear = document.querySelector('.panel-bg-color-clear');
-DOM.btnClearAll = document.querySelector(".panel-clear-all");
-DOM.btnSaveToFile = document.querySelector(".panel-save-to-file");
-DOM.btnHelp = document.querySelector(".panel-help");
+DOM.btnPanelToggle = document.querySelector('.panel-btn-toggle');
+DOM.btnShowPopup = document.querySelector('.panel-btn-code');
+DOM.btnBgColorClear = document.querySelector('.panel-btn-bg-color-clear');
+DOM.btnClearAll = document.querySelector(".panel-btn-clear-all");
+DOM.btnSaveToFile = document.querySelector(".panel-btn-save-to-file");
+DOM.btnHelp = document.querySelector(".panel-btn-help");
 DOM.popupHelp = document.querySelector("#popupHelp");
 DOM.popupCode = document.querySelector("#popupCode");
 DOM.finalCode = document.querySelector("#finalCode");
@@ -49,7 +49,7 @@ function generatePanelRow(gradient) {
 
     div.innerHTML = `
         <div class="panel-input-group panel-input-group-0">
-            <div class="panel-color" style="background-color: ${color}"><span>${gradient.nr}</span></div>
+            <div class="panel-row-color-select" style="background-color: ${color}"><span>${gradient.nr}</span></div>
         </div>
         <div class="panel-input-group panel-input-group-1">
             <span class="panel-label">x</span>
@@ -72,9 +72,9 @@ function generatePanelRow(gradient) {
             <input class="panel-input-blur" data-key="blur" type="range" min="0" max="100" value="${gradient.blur}" />
         </div>
         <div class="panel-input-group panel-input-group-buttons panel-input-5">
-            <button class="btn-up panel-row-up">up</button>
-            <button class="btn-down panel-row-down">down</button>
-            <button class="btn-delete panel-row-delete">x</button>
+            <button class="btn-up panel-btn-row-up">up</button>
+            <button class="btn-down panel-btn-row-down">down</button>
+            <button class="btn-delete panel-btn-row-delete">x</button>
         </div>
     </div>
     `;
@@ -97,7 +97,7 @@ function generatePanelRow(gradient) {
         });
     }
 
-    const place = div.querySelector('.panel-color');
+    const place = div.querySelector('.panel-row-color-select');
     const cp = new ColorPicker(place, {
         libraryID: 100,
         showLibrary: false,

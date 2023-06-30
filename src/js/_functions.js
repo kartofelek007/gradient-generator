@@ -9,14 +9,14 @@ export function generateGradient(data, bgColor) {
     let bgSize = ''; //`0 0 / 100% 100%`;
 
     if (bgColor !== null) {
-        gradientsArr.push(`linear-gradient(${bgColor}, ${bgColor}) ${bgSize}`);
+        gradientsArr.push(`linear-gradient(${bgColor}, ${bgColor})${bgSize}`);
     }
 
     for (let gr of data) {
         const color = getColorOfGradient(gr);
         const blur = gr.size - gr.size * (gr.blur / 100);
         gradientsArr.push(
-            `radial-gradient(circle at ${gr.x.toFixed(2)}% ${gr.y.toFixed(2)}%, ${color}, ${color} ${blur}%, transparent ${gr.size}%) ${bgSize}`
+            `radial-gradient(circle at ${gr.x.toFixed(2)}% ${gr.y.toFixed(2)}%, ${color}, ${color} ${blur}%, transparent ${gr.size}%)${bgSize}`
         );
     }
 

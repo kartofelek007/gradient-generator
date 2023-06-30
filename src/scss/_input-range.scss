@@ -1,0 +1,56 @@
+@mixin rangeTrack() {
+    background: #fff;
+    border: 0;
+    height: var(--input-size);
+    border-radius: 2px;
+    padding-left: 1px;
+    padding-right: 1px;
+    box-shadow: inset 0 0 0 1px rgba(#000, 0.2);
+}
+
+@mixin rangeThumb() {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: rgba(#000, 0.8);
+    height: calc(var(--input-size) - 2px);
+    border: 1px solid #fff;
+    width: 6px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px $colorShadow;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    margin: 0;
+    height: 100%;
+    vertical-align: top;
+
+    &::-webkit-slider-runnable-track {
+        @include rangeTrack();
+    }
+
+    &::-moz-range-track {
+        @include rangeTrack();
+    }
+
+    &::-webkit-slider-thumb {
+        @include rangeThumb();
+    }
+
+    &::-moz-range-thumb {
+        @include rangeThumb();
+    }
+
+    @media (max-width: 890px) {
+        max-width: 100px;
+    }
+
+    @media (max-width: 700px) {
+        max-width: 80px;
+    }
+}

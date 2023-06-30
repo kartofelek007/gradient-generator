@@ -1,0 +1,87 @@
+.canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    resize: both;
+    overflow: auto;
+    box-shadow: 0 2px 10px rgba(#000, 0.2);
+    min-height: 60px;
+    min-width: 60px;
+}
+
+.canvas-inside,
+.canvas-bg {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.canvas-inside {
+    z-index: 1;
+}
+
+.canvas-bg {
+    z-index: 0;
+    pointer-events: none;
+}
+
+.canvas-inside.is-show-dimension::before {
+    content: attr(data-dimension);
+    font-size: 11px;
+    padding: 2px;
+    line-height: 1;
+    font-family: sans-serif;
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    z-index: 10;
+    pointer-events: none;
+    color: #000;
+    background: rgba(#fff, 0.8);
+    font-weight: 600;
+    text-shadow: 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9);
+}
+
+.canvas-dot-moved {
+    .canvas-dot,
+    .panel {
+        pointer-events: none;
+    }
+}
+
+.canvas-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+    background: linear-gradient(to bottom, #333, #000);
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: move;
+    display: flex;
+    box-shadow: 0 0 0 1px rgba(#fff, 0.3);
+    justify-content: center;
+    align-items: center;
+}
+
+.canvas-dot::before {
+    content: attr(data-text);
+    pointer-events: none;
+}
+
+.canvas-dot-selected {
+    box-shadow: 0 0 0 2px #fff;
+}
+
+.canvas-dots-hide {
+    .canvas-dot {
+        opacity: 0;
+        pointer-events: none;
+    }
+}

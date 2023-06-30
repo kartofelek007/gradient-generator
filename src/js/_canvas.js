@@ -6,6 +6,7 @@ import html2canvas from 'html2canvas';
 
 let drag = false;
 let dragElement = null;
+let timeShowDimension = null;
 
 const DOM = {};
 DOM.canvas = document.querySelector('.canvas');
@@ -103,6 +104,11 @@ function setDimension(width, height) {
 function onCanvasResize() {
     const box = DOM.canvas.getBoundingClientRect();
     DOM.canvasInside.dataset.dimension = `${box.width}x${box.height}`;
+    DOM.canvasInside.classList.add("is-show-dimension");
+    clearInterval(timeShowDimension);
+    timeShowDimension = setTimeout(() => {
+        DOM.canvasInside.classList.remove("is-show-dimension");
+    }, 2000)
     storage.current.dimension.width = DOM.canvasInside.offsetWidth;
     storage.current.dimension.height = DOM.canvasInside.offsetHeight;
 }

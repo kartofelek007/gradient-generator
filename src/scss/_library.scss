@@ -1,0 +1,153 @@
+.library-show-btn {
+    position: absolute;
+    left: -50px;
+    top: 20px;
+    z-index: 2;
+}
+
+.library.is-show .btn-show-library {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-x' viewBox='0 0 16 16'%3E  %3Cpath d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: 20px;
+}
+
+.library-btn-save {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    color: #fafafa;
+    font-size: 12px;
+    height: $inputSize;
+    background-color: #000;
+    overflow: hidden;
+    border: 0;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 0 10px;
+    vertical-align: top;
+
+    &:hover {
+        background-color: #222;
+    }
+}
+
+.library {
+    z-index: 2;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    transform: translate(100%);
+    width: 400px;
+    height: 100%;
+    padding: 20px;
+    background: rgba(#fff, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &.is-show {
+        transform: none;
+        box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+            0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+            0 12.5px 10px rgba(0, 0, 0, 0.035),
+            0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+            0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+            0 100px 80px rgba(0, 0, 0, 0.07);
+    }
+}
+
+.library-list {
+    display: flex;
+    // flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    overflow-y: auto;
+    gap: 10px;
+    padding-right: 10px;
+    flex: 1;
+    @include scrollTheme();
+}
+
+.library-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    width: 50px;
+    border: 0;
+    height: 50px;
+    background: none;
+    text-indent: -9999px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #000;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        width: 22px;
+        height: 2px;
+        background: #fff;
+    }
+
+    &::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+}
+
+.library-element {
+    border-radius: 3px;
+    overflow: hidden;
+    text-align: left;
+    position: relative;
+    flex-basis: 100%;
+    cursor: pointer;
+    flex-shrink: 0;
+    aspect-ratio: 16 / 9;
+    border: 1px solid rgba(#000, 0.5);
+}
+
+.library-element-inside {
+    width: 100%;
+    height: 100%;
+}
+
+.library-element-text {
+    font-size: 8px;
+    padding: 2px;
+    line-height: 1;
+    font-family: sans-serif;
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    color: #000;
+    background: rgba(#fff, 0.7);
+    font-weight: 600;
+    text-shadow: 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9);
+}
+
+.library-element-delete {
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    width: 25px;
+    height: 25px;
+    background-color: #000;
+    border: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-indent: -9999px;
+    overflow: hidden;
+    cursor: pointer;
+    background-size: 13px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-trash3-fill' viewBox='0 0 16 16'%3E  %3Cpath d='M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+body.animation-init .library {
+    transition: 0.2s transform;
+}
