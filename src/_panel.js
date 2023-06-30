@@ -1,6 +1,6 @@
 import { storage } from './_storage';
 import { canvas } from './_canvas';
-import { getColorOfGradient } from './_functions';
+import { generateGradient, getColorOfGradient } from './_functions';
 import './color-picker/css/style.css';
 import { ColorPicker } from './color-picker/js/colorpicker';
 import { events } from './_events';
@@ -304,7 +304,7 @@ DOM.panelCode.addEventListener('click', (e) => {
     if (!storage.current.gradients.length) {
         bg = `background: ${storage.getCurrentBgColor()};`;
     } else {
-        bg = `background: ${storage.generateGradient(
+        bg = `background: ${generateGradient(
             storage.current.gradients,
             storage.getCurrentBgColor()
         )};`;
