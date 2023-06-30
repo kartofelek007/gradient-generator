@@ -58,12 +58,26 @@ function deleteDot(nr) {
 }
 
 /**
- * ustawia rozmiar płótna jako dataset
+ * ustawia rozmiar płótna
+ * @param {number} width
+ * @param {number} height
  */
-function setDimension() {
-    DOM.canvas.dataset.dimension = `${DOM.canvas.offsetWidth}x${DOM.canvas.offsetHeight}`;
+function setDimension(width, height) {
+    storage.current.dimension.width = width;
+    storage.current.dimension.height = height;
+    DOM.canvasCnt.style.width = width + "px";
+    DOM.canvasCnt.style.height = height + "px";
 }
 
+/**
+ * ustawia rozmiar płótna jako dataset
+ */
+function onCanvasResize() {
+    const box = DOM.canvasCnt.getBoundingClientRect();
+    DOM.canvas.dataset.dimension = `${box.width}x${box.height}`;
+    storage.current.dimension.width = DOM.canvas.offsetWidth;
+    storage.current.dimension.height = DOM.canvas.offsetHeight;
+}
 
 DOM.canvas.addEventListener('mouseup', () => {
     drag = false;
@@ -111,7 +125,7 @@ DOM.dotsToggle.addEventListener('click', (e) => {
 });
 
 //nasłuchiwanie zmiany rozmiarów płótna
-new ResizeObserver(setDimension).observe(DOM.canvas);
+new ResizeObserver(onCanvasResize).observe(DOM.canvas);
 
 events.deleteGradient.on(({gradientsCount, gradientCount}) => {
     generateDots();
@@ -131,4 +145,5 @@ export const canvas = {
     setCanvasBg,
     generateDots,
     deleteDot,
+    setDimension
 };

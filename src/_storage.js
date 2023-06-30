@@ -5,7 +5,13 @@ let currentId = 0;
 let current = {
     bgColor: null,
     gradients: [],
+    dimension: {
+        width : null,
+        height : null
+    }
 };
+
+window.ccc = current;
 
 /**
  * Pobiera z aktualnej kolekcji gradient o danym numerze

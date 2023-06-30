@@ -31,6 +31,10 @@ function saveCurrentToLibrary() {
         id: uniqueKey(),
         data: stripCurrentGradientsData,
         bgColor: storage.current.bgColor,
+        dimension: {
+            width: storage.current.dimension.width,
+            height: storage.current.dimension.height,
+        }
     };
     libraryStorage.gradients.push(gradientToSave);
     const json = JSON.stringify(libraryStorage);
@@ -73,6 +77,9 @@ function loadGradientFromLibrary(id) {
         storage.current.gradients = clonedData.data;
         storage.setBgColor(clonedData.bgColor);
         //muszę dodać dwa dodatkowe pola do każdego gradientu w kolekcji
+        if (clonedData.dimension) {
+            canvas.setDimension(clonedData.dimension.width, clonedData.dimension.height)
+        }
         storage.current.gradients.forEach(
             (el) => (el.elements = {row: null, dot: null})
         );
@@ -95,6 +102,7 @@ function generateLibrary() {
         thumb.classList.add('library-element');
 
         const thumbInside = document.createElement('div');
+        thumbInside.classList.add("library-element-inside");
         thumbInside.style.background = generateGradient(el.data, el.bgColor);
         if (el.bgColor === null) {
             thumb.classList.add('transparent-color');
@@ -109,6 +117,13 @@ function generateLibrary() {
             deleteGradientFromLibrary(id);
             generateLibrary();
         });
+
+        if (el.dimension) {
+            const div = document.createElement("div");
+            div.classList.add("library-element-text");
+            div.innerHTML = `${el.dimension.width}x${el.dimension.height}`;
+            thumb.append(div)
+        }
 
         thumb.append(btnDelete);
 
