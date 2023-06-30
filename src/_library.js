@@ -1,9 +1,9 @@
-import { uniqueKey } from './lib/_unique-key';
-import { storage } from './_storage';
-import { generateGradient } from './_functions';
-import { canvas } from './_canvas';
-import { panel } from './_panel';
-import { events } from './_events';
+import {uniqueKey} from './lib/_unique-key';
+import {storage} from './_storage';
+import {generateGradient} from './_functions';
+import {canvas} from './_canvas';
+import {panel} from './_panel';
+import {events} from './_events';
 
 const libraryStorage = {
     gradients: [],
@@ -22,7 +22,7 @@ function saveCurrentToLibrary() {
     const stripCurrentGradientsData = [];
 
     for (let el of storage.current.gradients) {
-        const { elements, ...stripData } = el;
+        const {elements, ...stripData} = el;
         const copy = structuredClone(stripData); //klonuję
         stripCurrentGradientsData.push(copy);
     }
@@ -74,7 +74,7 @@ function loadGradientFromLibrary(id) {
         storage.setBgColor(clonedData.bgColor);
         //muszę dodać dwa dodatkowe pola do każdego gradientu w kolekcji
         storage.current.gradients.forEach(
-            (el) => (el.elements = { row: null, dot: null })
+            (el) => (el.elements = {row: null, dot: null})
         );
         panel.generatePanel();
         canvas.generateDots();
@@ -103,7 +103,7 @@ function generateLibrary() {
         const btnDelete = document.createElement('button');
         btnDelete.classList.add('library-element-delete');
         btnDelete.innerText = 'Delete';
-        btnDelete.addEventListener('click', (e) => {
+        btnDelete.addEventListener('click', () => {
             const id = el.id;
             deleteGradientFromLibrary(id);
             generateLibrary();
@@ -111,9 +111,8 @@ function generateLibrary() {
 
         thumb.append(btnDelete);
 
-        thumb.addEventListener('click', (e) => {
-            const id = thumb.dataset.id;
-            loadGradientFromLibrary(id);
+        thumb.addEventListener('click', () => {
+            loadGradientFromLibrary(thumb.dataset.id);
         });
         DOM.libraryList.prepend(thumb);
     }
@@ -152,12 +151,12 @@ function toggleLibrary() {
 setDefaultLibrary();
 initLibrary();
 
-DOM.librarySave.addEventListener('click', (e) => {
+DOM.librarySave.addEventListener('click', () => {
     saveCurrentToLibrary();
     generateLibrary();
 });
 
-DOM.btnShowLibrary.addEventListener('click', (e) => {
+DOM.btnShowLibrary.addEventListener('click', () => {
     toggleLibrary();
 });
 

@@ -1,3 +1,9 @@
+/**
+ * tworzy tekst gradientu
+ * @param data
+ * @param bgColor
+ * @returns {string}
+ */
 export function generateGradient(data, bgColor) {
     let gradientsArr = [];
     let bgSize = `0 0 / 100% 100%`;
@@ -19,6 +25,12 @@ export function generateGradient(data, bgColor) {
     return arr.join(',');
 }
 
+/**
+ * return color from gradient
+ * @param gradient
+ * @param withAlpha
+ * @returns {string}
+ */
 export function getColorOfGradient(gradient, withAlpha = true) {
     if (withAlpha) {
         return `hsla(${gradient.color.h}, ${gradient.color.s}%, ${gradient.color.l}%, ${gradient.transparent / 100})`;

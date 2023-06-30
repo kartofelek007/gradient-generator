@@ -1,11 +1,10 @@
-import { events } from './_events';
-import { generateGradient } from './_functions';
-import { panel } from './_panel';
-import { storage } from './_storage';
+import {events} from './_events';
+import {generateGradient} from './_functions';
+import {panel} from './_panel';
+import {storage} from './_storage';
 
 let drag = false;
 let dragElement = null;
-let selectedGradient = null;
 
 const DOM = {};
 DOM.dotsToggle = document.querySelector('.panel-toggle-dots');
@@ -16,16 +15,15 @@ DOM.canvas = document.querySelector('.canvas');
  */
 function setCanvasBg() {
     document.body.classList.toggle('transparent-color', storage.current.bgColor === null);
-    const gradient = generateGradient(
+    DOM.canvas.style.background = generateGradient(
         storage.current.gradients,
         storage.current.bgColor
     );
-    DOM.canvas.style.background = gradient;
 }
 
 /**
  * Tworzy pojedynczą kropkę na płótnie
- * @param {singleGradientObject} gradient
+ * @param {object} gradient
  * @returns HTMLElement
  */
 function generateDot(gradient) {
@@ -45,14 +43,13 @@ function generateDot(gradient) {
 function generateDots() {
     DOM.canvas.innerHTML = '';
     for (let el of storage.current.gradients) {
-        const dot = generateDot(el);
-        el.elements.dot = dot;
+        el.elements.dot = generateDot(el);
     }
 }
 
 /**
  * Usuwa kropkę dla gradientu o danym numerze
- * @param {nrGradientu} nr
+ * @param {number} nr
  */
 function deleteDot(nr) {
     const gradient = getGradientByNr(nr);
@@ -113,7 +110,7 @@ events.setBg.on((color) => {
     setCanvasBg();
 });
 
-events.addNewGradient.on((_) => {
+events.addNewGradient.on(() => {
     setCanvasBg();
     generateDots();
 });

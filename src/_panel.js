@@ -1,14 +1,13 @@
-import { storage } from './_storage';
-import { canvas } from './_canvas';
-import { generateGradient, getColorOfGradient } from './_functions';
+import {storage} from './_storage';
+import {canvas} from './_canvas';
+import {generateGradient, getColorOfGradient} from './_functions';
 import './color-picker/css/style.css';
-import { ColorPicker } from './color-picker/js/colorpicker';
-import { events } from './_events';
-import { popup } from './_popup';
-import { gsap } from "gsap";
-import { Flip } from "gsap/Flip";
-import { hex2rgb, rgb2hsl } from './lib/_colors-fn';
-import { rgb2hsb } from './color-picker/js/functions';
+import {ColorPicker} from './color-picker/js/colorpicker';
+import {events} from './_events';
+import {popup} from './_popup';
+import {gsap} from "gsap";
+import {Flip} from "gsap/Flip";
+import {hex2rgb, rgb2hsl} from './lib/_colors-fn';
 
 gsap.registerPlugin(Flip);
 
@@ -27,8 +26,7 @@ DOM.panelBgColorClear = document.querySelector('.panel-bg-color-clear');
 function generatePanel() {
     DOM.panelList.innerHTML = '';
     for (let el of storage.current.gradients) {
-        const row = generatePanelRow(el);
-        el.elements.row = row;
+        el.elements.row = generatePanelRow(el);
     }
 }
 
@@ -105,10 +103,7 @@ function generatePanelRow(gradient) {
         const data = storage.getGradientByNr(gradient.nr);
         const rgb = hex2rgb(color);
         const hsl = rgb2hsl(rgb.r, rgb.g, rgb.b);
-        const newColor = `hsla(${hsl[0] * 360}, ${hsl[1] * 100}%, ${
-            hsl[2] * 100
-        }%, 1)`;
-        place.style.background = newColor;
+        place.style.background = `hsla(${hsl[0] * 360}, ${hsl[1] * 100}%, ${hsl[2] * 100}%, 1)`;
         data.color = {
             h: hsl[0] * 360,
             s: hsl[1] * 100,
@@ -145,7 +140,7 @@ function unselectActiveRow() {
 
 /**
  * zaznacza aktywy rząd (podczas przesuwania kropki na canvasie)
- * @param {obiect} gradient
+ * @param {object} gradient
  */
 function selectActiveRow(gradient) {
     unselectActiveRow();
@@ -154,7 +149,7 @@ function selectActiveRow(gradient) {
 
 /**
  * Aktualizuje rząd dla danego gradientu
- * @param {obiect} gradient
+ * @param {object} gradient
  */
 function fillPanelRow(gradient) {
     const row = gradient.elements.row;
@@ -232,8 +227,8 @@ DOM.panel.addEventListener('click', (e) => {
             row.nextElementSibling.after(row);
 
             const g = storage.current.gradients;
-            const temp = { ...g[index - 1] };
-            g[index - 1] = { ...g[index] };
+            const temp = {...g[index - 1]};
+            g[index - 1] = {...g[index]};
             g[index] = temp;
             console.log(g);
 
@@ -258,8 +253,8 @@ DOM.panel.addEventListener('click', (e) => {
             row.previousElementSibling.before(row);
 
             const g = storage.current.gradients;
-            const temp = { ...g[index] };
-            g[index] = { ...g[index + 1] };
+            const temp = {...g[index]};
+            g[index] = {...g[index + 1]};
             g[index + 1] = temp;
             console.log(g);
 
@@ -290,17 +285,17 @@ DOM.panel.addEventListener('click', (e) => {
     }
 });
 
-DOM.btnAdd.addEventListener('click', (e) => {
+DOM.btnAdd.addEventListener('click', () => {
     storage.addNewGradient();
     storage.recalculateGradientsNumbers();
 });
 
-DOM.panelToggle.addEventListener('click', (e) => {
+DOM.panelToggle.addEventListener('click', () => {
     DOM.panel.classList.toggle('panel-mini');
 });
 
-DOM.panelCode.addEventListener('click', (e) => {
-    let bg = '';
+DOM.panelCode.addEventListener('click', () => {
+    let bg;
     if (!storage.current.gradients.length) {
         bg = `background: ${storage.getCurrentBgColor()};`;
     } else {
@@ -312,7 +307,7 @@ DOM.panelCode.addEventListener('click', (e) => {
     popup.showPopup(bg);
 });
 
-DOM.panelBgColorClear.addEventListener('click', (e) => {
+DOM.panelBgColorClear.addEventListener('click', () => {
     storage.setBgColor('transparent');
 });
 

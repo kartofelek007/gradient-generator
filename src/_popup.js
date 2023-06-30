@@ -4,7 +4,7 @@ DOM.popupClose = DOM.popup.querySelector('.popup-close');
 DOM.popupBtn = DOM.popup.querySelector('.popup-btn');
 DOM.popupCode = DOM.popup.querySelector('.popup-code');
 
-DOM.popupBtn.addEventListener('click', (e) => {
+DOM.popupBtn.addEventListener('click', () => {
     const range = document.createRange(); // create new range object
     range.selectNodeContents(DOM.popupCode); // set range to encompass desired element text
     const selection = window.getSelection(); // get Selection object from currently user selected text
@@ -14,7 +14,7 @@ DOM.popupBtn.addEventListener('click', (e) => {
     DOM.popupBtn.classList.add('is-copy');
 });
 
-DOM.popupClose.addEventListener('click', (e) => {
+DOM.popupClose.addEventListener('click', () => {
     document.body.classList.remove("popup-show");
     DOM.popup.classList.remove('is-show');
     DOM.popupBtn.classList.remove('is-copy');

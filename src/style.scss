@@ -2,21 +2,21 @@ $inputSize: 30px;
 $colorShadow: rgba(#fff, 0.3);
 
 @mixin scrollTheme($color : #000, $size: 5px, $bg : rgba(#ddd, 0.7)) {
-	scrollbar-width: thin;
-	scrollbar-color: $color $bg;
+    scrollbar-width: thin;
+    scrollbar-color: $color $bg;
 
-	&::-webkit-scrollbar {
-		width: $size;
-		height: $size;
-	}
-	&::-webkit-scrollbar-track {
-		background-color: $bg;
-		border-radius: $size;
-	}
-	&::-webkit-scrollbar-thumb {
-		background: rgba($color, 1);
-		border-radius: $size;
-	}
+    &::-webkit-scrollbar {
+        width: $size;
+        height: $size;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: $bg;
+        border-radius: $size;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba($color, 1);
+        border-radius: $size;
+    }
 }
 
 %panelBtn {
@@ -62,7 +62,7 @@ $colorShadow: rgba(#fff, 0.3);
         align-items: center;
         color: #000;
         font-weight: bold;
-        text-shadow: 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9),0 0 0.5px rgba(#fff, 0.9),0 0 0.5px rgba(#fff, 0.9),0 0 0.5px rgba(#fff, 0.9),0 0 0.5px rgba(#fff, 0.9),0 0 0.5px rgba(#fff, 0.9),0 0 0.5px rgba(#fff, 0.9),0 0 0.5px rgba(#fff, 0.9);
+        text-shadow: 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9);
         z-index: 1;
     }
 }
@@ -82,7 +82,7 @@ body {
 }
 
 .transparent-color {
-    background-image: repeating-linear-gradient(90deg, hsla(196,0%,79%,0.06) 0px, hsla(196,0%,79%,0.06) 1px,transparent 1px, transparent 96px),repeating-linear-gradient(0deg, hsla(196,0%,79%,0.06) 0px, hsla(196,0%,79%,0.06) 1px,transparent 1px, transparent 96px),repeating-linear-gradient(0deg, hsla(196,0%,79%,0.09) 0px, hsla(196,0%,79%,0.09) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(90deg, hsla(196,0%,79%,0.09) 0px, hsla(196,0%,79%,0.09) 1px,transparent 1px, transparent 12px),linear-gradient(90deg, rgb(255,255,255),rgb(255,255,255));
+    background-image: repeating-linear-gradient(90deg, hsla(196, 0%, 79%, 0.06) 0px, hsla(196, 0%, 79%, 0.06) 1px, transparent 1px, transparent 96px), repeating-linear-gradient(0deg, hsla(196, 0%, 79%, 0.06) 0px, hsla(196, 0%, 79%, 0.06) 1px, transparent 1px, transparent 96px), repeating-linear-gradient(0deg, hsla(196, 0%, 79%, 0.09) 0px, hsla(196, 0%, 79%, 0.09) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(90deg, hsla(196, 0%, 79%, 0.09) 0px, hsla(196, 0%, 79%, 0.09) 1px, transparent 1px, transparent 12px), linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255));
     background-color: #eee;
 }
 
@@ -304,7 +304,6 @@ $iconColor: "%23fff"; //%23
     pointer-events: none;
 }
 
-
 @mixin rangeTrack() {
     background: #fff;
     border: 0;
@@ -443,8 +442,6 @@ input[type="range"] {
     background-size: 25px;
 }
 
-
-
 .btn-show-library {
     @extend %panelBtn;
     position: absolute;
@@ -491,8 +488,7 @@ input[type="range"] {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    box-shadow:
-    0px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    box-shadow: 0px 2.8px 2.2px rgba(0, 0, 0, 0.02),
     0px 6.7px 5.3px rgba(0, 0, 0, 0.028),
     0px 12.5px 10px rgba(0, 0, 0, 0.035),
     0px 22.3px 17.9px rgba(0, 0, 0, 0.042),
@@ -541,6 +537,7 @@ input[type="range"] {
         height: 2px;
         background: #fff;
     }
+
     &::after {
         transform: translate(-50%, -50%) rotate(-45deg);
     }

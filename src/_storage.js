@@ -1,6 +1,4 @@
-import { canvas } from './_canvas';
-import { events } from './_events';
-import { panel } from './_panel';
+import {events} from './_events';
 
 let currentId = 0;
 
@@ -28,7 +26,7 @@ function getCurrentBgColor() {
 
 /**
  * Tworzy pojedynczy obiekt gradientu
- * @returns gradientObject
+ * @returns {solid: boolean, nr: number, color: {s: number, h: number, l: number}, size: number, elements: {dot: null, row: null}, x: number, y: number, blur: number, transparent: number}
  */
 function generateNewGradientObj() {
     currentId++;
@@ -58,8 +56,8 @@ function generateNewGradientObj() {
  * @returns
  */
 function recalculateGradientsNumbers() {
-    return
-    current.gradients.forEach((el, i) => (el.nr = i));
+    return false;
+    //current.gradients.forEach((el, i) => (el.nr = i));
 }
 
 /**
@@ -80,7 +78,7 @@ function deleteGradient(nr) {
  * @param {*} gradient
  */
 function addNewGradient(gradient) {
-    let obGradient = (gradient) ? gradient : storage.generateNewGradientObj();;
+    let obGradient = (gradient) ? gradient : storage.generateNewGradientObj();
     current.gradients.push(obGradient);
     recalculateGradientsNumbers();
     events.addNewGradient.emit();
