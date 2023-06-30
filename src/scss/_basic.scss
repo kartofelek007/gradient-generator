@@ -22,13 +22,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    $lineColor: "%23ddd";
-    $size: 3.5px;
-    $bg: #fff;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6.79 27.73'%3E%3Cpath d='M5.75,0C5.75,2.47.83,4.51.83,7s4.88,4.46,4.88,6.9S.81,18.34.81,20.78s4.92,4.49,4.92,7' fill='none' stroke='#{$lineColor}' stroke-miterlimit='10'/%3E%3C/svg%3E");
-    background-size: $size;
-    background-color: $bg;
+    background: #F6F7FA;
 }
 
 .transparent-color {
