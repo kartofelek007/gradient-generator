@@ -16,10 +16,11 @@
         <div class="panel-header">
             <button class="btn-code panel-code" title="Show code">Show code</button>
             <button class="btn-help panel-help">Help</button>
+            <button class="btn-save-to-file panel-save-to-file" hidden>Save to file</button>
         </div>
         <div class="panel-row panel-row-color">
             <div class="btn-color-select panel-color panel-bg-color" title="Set bg color"><span>bg</span><b></b></div>
-            <button class="bg-color-clear panel-bg-color-clear" hidden title="Remove bg color">Make transparent</button>
+            <button class="btn-delete panel-bg-color-clear" hidden title="Remove bg color">Make transparent</button>
         </div>
         <div class="panel-row-add">
             <button class="btn-add panel-add" id="panelAdd">Add gradient</button>
@@ -32,6 +33,7 @@
 
     <div class="canvas">
         <div class="canvas-inside"></div>
+        <div class="canvas-bg"></div>
     </div>
 
     <div class="library">

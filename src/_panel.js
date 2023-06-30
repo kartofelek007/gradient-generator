@@ -20,6 +20,7 @@ DOM.btnPanelToggle = document.querySelector('.panel-toggle');
 DOM.btnShowPopup = document.querySelector('.panel-code');
 DOM.btnBgColorClear = document.querySelector('.panel-bg-color-clear');
 DOM.btnClearAll = document.querySelector(".panel-clear-all");
+DOM.btnSaveToFile = document.querySelector(".panel-save-to-file");
 DOM.btnHelp = document.querySelector(".panel-help");
 DOM.popupHelp = document.querySelector("#popupHelp");
 DOM.popupCode = document.querySelector("#popupCode");
@@ -175,6 +176,10 @@ function setVisibilityBtnClearAll() {
  */
 function setVisibilityBtnPanelToggle() {
     DOM.btnPanelToggle.hidden = storage.current.gradients.length === 0;
+}
+
+function setVisibilityBtnSaveToFile() {
+    DOM.btnSaveToFile.hidden = storage.current.gradients.length === 0;
 }
 
 /**
@@ -342,25 +347,35 @@ DOM.btnClearAll.addEventListener("click", () => {
         generatePanel();
         canvas.generateDots();
         canvas.setCanvasBg();
-        setVisibilityBtnPanelToggle()
+        setVisibilityBtnPanelToggle();
+        setVisibilityBtnSaveToFile();
     }
 })
+
+DOM.btnSaveToFile.addEventListener('click', async (e) => {
+    e.target.disable = true;
+    await canvas.saveCanvasToPng();
+    e.target.disable = false;
+});
 
 events.deleteGradient.on(({gradientsCount, gradientCount}) => {
     setVisibilityBtnPanelToggle();
     generatePanel();
     setVisibilityBtnClearAll();
+    setVisibilityBtnSaveToFile();
 });
 
 events.setBg.on((color) => {
     setButtonBgBackground(color);
     setVisibilityBtnClearAll();
+    setVisibilityBtnSaveToFile();
 });
 
 events.addNewGradient.on((_) => {
     generatePanel();
     setVisibilityBtnPanelToggle();
     setVisibilityBtnClearAll();
+    setVisibilityBtnSaveToFile();
 });
 
 export const panel = {

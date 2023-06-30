@@ -2,24 +2,44 @@ import {events} from './_events';
 import {generateGradient} from './_functions';
 import {panel} from './_panel';
 import {storage} from './_storage';
+import html2canvas from 'html2canvas';
 
 let drag = false;
 let dragElement = null;
 
 const DOM = {};
-DOM.canvasCnt = document.querySelector('.canvas');
-DOM.canvas = document.querySelector('.canvas-inside');
+DOM.canvas = document.querySelector('.canvas');
+DOM.canvasInside = document.querySelector('.canvas-inside');
+DOM.canvasBg = document.querySelector(".canvas-bg");
+
+async function saveCanvasToPng() {
+    const leadZero = (i) => `${i}`.padStart(2, "0");
+
+    try {
+        const canvas = await html2canvas(DOM.canvasBg);
+        const link = document.createElement("a");
+        document.body.append(link);
+        const date = new Date();
+        const dateText = `${leadZero(date.getDay())}-${leadZero(date.getMonth()+1)}-${date.getFullYear()}`;
+        link.setAttribute('download', `gradient-${dateText}.png`);
+        link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+        link.click();
+    } catch (err) {
+        alert("Nie można zapisać do pliku :(");
+    }
+}
 
 /**
  * ustawia tło płótna
  */
 function setCanvasBg() {
-    DOM.canvasCnt.classList.toggle('transparent-color', storage.current.bgColor === null);
-    DOM.canvas.style.background = generateGradient(
+    DOM.canvas.classList.toggle('transparent-color', storage.current.bgColor === null);
+    DOM.canvasBg.style.background = generateGradient(
         storage.current.gradients,
         storage.current.bgColor
     );
 }
+
 
 /**
  * Tworzy pojedynczą kropkę na płótnie
@@ -33,15 +53,22 @@ function generateDot(gradient) {
     dot.dataset.text = gradient.nr + 1;
     dot.style.left = `${gradient.x}%`;
     dot.style.top = `${gradient.y}%`;
-    DOM.canvas.append(dot);
+    DOM.canvasInside.append(dot);
     return dot;
+}
+
+/**
+ * Usuwa wszystkie kropki na płótnie
+ */
+function removeAllDots() {
+    DOM.canvasInside.innerHTML = '';
 }
 
 /**
  * Tworzy wszystkie kropki na płótnie
  */
-function generateDots() {
-    DOM.canvas.innerHTML = '';
+function generateAllDots() {
+    removeAllDots();
     for (let el of storage.current.gradients) {
         el.elements.dot = generateDot(el);
     }
@@ -64,21 +91,21 @@ function deleteDot(nr) {
 function setDimension(width, height) {
     storage.current.dimension.width = width;
     storage.current.dimension.height = height;
-    DOM.canvasCnt.style.width = width + "px";
-    DOM.canvasCnt.style.height = height + "px";
+    DOM.canvas.style.width = width + "px";
+    DOM.canvas.style.height = height + "px";
 }
 
 /**
  * ustawia rozmiar płótna jako dataset
  */
 function onCanvasResize() {
-    const box = DOM.canvasCnt.getBoundingClientRect();
-    DOM.canvas.dataset.dimension = `${box.width}x${box.height}`;
-    storage.current.dimension.width = DOM.canvas.offsetWidth;
-    storage.current.dimension.height = DOM.canvas.offsetHeight;
+    const box = DOM.canvas.getBoundingClientRect();
+    DOM.canvasInside.dataset.dimension = `${box.width}x${box.height}`;
+    storage.current.dimension.width = DOM.canvasInside.offsetWidth;
+    storage.current.dimension.height = DOM.canvasInside.offsetHeight;
 }
 
-DOM.canvas.addEventListener('mouseup', () => {
+DOM.canvasInside.addEventListener('mouseup', () => {
     drag = false;
     panel.unselectActiveRow()
 
@@ -89,7 +116,7 @@ DOM.canvas.addEventListener('mouseup', () => {
     }
 });
 
-DOM.canvas.addEventListener('mousedown', (e) => {
+DOM.canvasInside.addEventListener('mousedown', (e) => {
     const dot = e.target.closest('.canvas-dot');
     if (dot) {
         drag = true;
@@ -103,10 +130,10 @@ DOM.canvas.addEventListener('mousedown', (e) => {
     }
 });
 
-DOM.canvas.addEventListener('mousemove', (e) => {
+DOM.canvasInside.addEventListener('mousemove', (e) => {
     if (dragElement && drag) {
-        const x = (e.offsetX / DOM.canvas.offsetWidth) * 100;
-        const y = (e.offsetY / DOM.canvas.offsetHeight) * 100;
+        const x = (e.offsetX / DOM.canvasInside.offsetWidth) * 100;
+        const y = (e.offsetY / DOM.canvasInside.offsetHeight) * 100;
         const nr = +dragElement.dataset.nr;
         const gradient = storage.getGradientByNr(nr);
         dragElement.style.left = `${x}%`;
@@ -119,10 +146,10 @@ DOM.canvas.addEventListener('mousemove', (e) => {
 });
 
 //nasłuchiwanie zmiany rozmiarów płótna
-new ResizeObserver(onCanvasResize).observe(DOM.canvas);
+new ResizeObserver(onCanvasResize).observe(DOM.canvasInside);
 
 events.deleteGradient.on(({gradientsCount, gradientCount}) => {
-    generateDots();
+    generateAllDots();
     setCanvasBg();
 });
 
@@ -132,12 +159,13 @@ events.setBg.on((color) => {
 
 events.addNewGradient.on(() => {
     setCanvasBg();
-    generateDots();
+    generateAllDots();
 });
 
 export const canvas = {
     setCanvasBg,
-    generateDots,
+    generateDots: generateAllDots,
     deleteDot,
-    setDimension
+    setDimension,
+    saveCanvasToPng
 };

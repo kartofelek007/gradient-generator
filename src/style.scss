@@ -38,6 +38,10 @@ $colorShadow: rgba(#fff, 0.3);
     &:hover {
         background-color: #222;
     }
+
+    &[disabled] {
+        opacity: 0.5;
+    }
 }
 
 %colorSelector {
@@ -113,26 +117,31 @@ body {
     box-shadow: 0 0 0 1px #aaa, 0 2px 5px rgba(#000, 0.2);
 }
 
-.canvas-inside {
+.canvas-inside,
+.canvas-bg {
     content: "";
     position: absolute;
     inset: 0;
 }
 
+.canvas-bg {
+    pointer-events: none;
+}
+
 .canvas-inside::before {
     content: attr(data-dimension);
-    font-size: 11px;
+    font-size: 10px;
     padding: 2px;
     line-height: 1;
     font-family: sans-serif;
     position: absolute;
-    left: 0;
-    bottom: 0;
+    left: 1px;
+    bottom: 1px;
+    z-index: 10;
     pointer-events: none;
     color: #000;
     background: rgba(#fff, 0.8);
     font-weight: 600;
-    border-radius: 0 2px 0 0;
     text-shadow: 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9);
 }
 
@@ -282,8 +291,7 @@ body {
 
 $iconColor: "%23fff"; //%23
 
-.panel-row-delete,
-.panel-bg-color-clear {
+.btn-delete {
     @extend %panelBtn;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#{$iconColor}' class='bi bi-x' viewBox='0 0 16 16'%3E  %3Cpath d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'%3E%3C/path%3E%3C/svg%3E");
 }
@@ -307,10 +315,6 @@ $iconColor: "%23fff"; //%23
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#{$iconColor}' class='bi bi-question-lg' viewBox='0 0 16 16'%3E  %3Cpath fill-rule='evenodd' d='M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215 0 1.344-.665 2.288-1.79 2.973-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712 1.03-.632 1.397-1.135 1.397-2.028 0-.979-.758-1.698-1.926-1.698-1.009 0-1.71.529-1.938 1.402-.066.254-.278.461-.54.461h-.777ZM7.496 14c.622 0 1.095-.474 1.095-1.09 0-.618-.473-1.092-1.095-1.092-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14Z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-.panel-help {
-    margin-left: 10px;
-}
-
 .btn-code {
     @extend %panelBtn;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#{$iconColor}' class='bi bi-code' viewBox='0 0 16 16'%3E  %3Cpath d='M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z'%3E%3C/path%3E%3C/svg%3E");
@@ -329,6 +333,11 @@ $iconColor: "%23fff"; //%23
 .btn-clear-all {
     @extend %panelBtn;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#{$iconColor}' class='bi bi-trash3-fill' viewBox='0 0 16 16'%3E  %3Cpath d='M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.btn-save-to-file {
+    @extend %panelBtn;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#{$iconColor}' class='bi bi-file-earmark-arrow-down-fill' viewBox='0 0 16 16'%3E  %3Cpath d='M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0z'%3E%3C/path%3E%3C/svg%3E");
 }
 
 .panel-clear-all {
@@ -637,7 +646,7 @@ input[type="range"] {
 }
 
 .library-element-text {
-    font-size: 11px;
+    font-size: 10px;
     padding: 2px;
     line-height: 1;
     font-family: sans-serif;
@@ -648,7 +657,6 @@ input[type="range"] {
     color: #000;
     background: rgba(#fff, 0.7);
     font-weight: 600;
-    border-radius: 0 0 2px 0;
     text-shadow: 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9), 0 0 0.5px rgba(#fff, 0.9);
 }
 
