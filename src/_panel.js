@@ -81,13 +81,13 @@ function generatePanelRow(gradient) {
     );
     for (let input of inputs) {
         input.addEventListener('input', (e) => {
-            const gradientToSet = storage.getGradientByNr(gradient.nr);
-            gradientToSet[input.dataset.key] = +e.target.value;
+            const data = storage.getGradientByNr(gradient.nr);
+            data[input.dataset.key] = +e.target.value;
             if (input.dataset.key === 'x' || input.dataset.key === 'y') {
                 //const dot = DOM.canvas.querySelector(`.canvas-dot[data-nr="${obGradient.nr}"]`);
-                const dot = gradientToSet.elements.dot;
-                dot.style.left = `${gradientToSet.x}%`;
-                dot.style.top = `${gradientToSet.y}%`;
+                const dot = data.elements.dot;
+                dot.style.left = `${data.x}%`;
+                dot.style.top = `${data.y}%`;
             }
             canvas.setCanvasBg();
         });
@@ -102,14 +102,14 @@ function generatePanelRow(gradient) {
     });
 
     const colorSelect = (color) => {
-        const gradient = storage.getGradientByNr(gradient.nr);
+        const data = storage.getGradientByNr(gradient.nr);
         const rgb = hex2rgb(color);
         const hsl = rgb2hsl(rgb.r, rgb.g, rgb.b);
         const newColor = `hsla(${hsl[0] * 360}, ${hsl[1] * 100}%, ${
             hsl[2] * 100
         }%, 1)`;
         place.style.background = newColor;
-        gradient.color = {
+        data.color = {
             h: hsl[0] * 360,
             s: hsl[1] * 100,
             l: hsl[2] * 100,
