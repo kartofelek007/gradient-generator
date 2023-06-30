@@ -278,6 +278,7 @@ DOM.panel.addEventListener('click', (e) => {
 
             const row = del.closest('.panel-row');
             const nr = +row.dataset.nr;
+            DOM.panelToggle.hidden = !storage.current.gradients.length;
             row.remove();
 
             Flip.from(state, {duration: 0.2});
@@ -326,6 +327,7 @@ events.setBg.on((color) => {
 
 events.addNewGradient.on((_) => {
     generatePanel();
+    DOM.panelToggle.hidden = !storage.current.gradients.length;
 });
 
 export const panel = {
