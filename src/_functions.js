@@ -6,7 +6,7 @@
  */
 export function generateGradient(data, bgColor) {
     let gradientsArr = [];
-    let bgSize = `0 0 / 100% 100%`;
+    let bgSize = ''; //`0 0 / 100% 100%`;
 
     if (bgColor !== null) {
         gradientsArr.push(`linear-gradient(${bgColor}, ${bgColor}) ${bgSize}`);

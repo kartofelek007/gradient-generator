@@ -20,6 +20,10 @@ DOM.btnPanelToggle = document.querySelector('.panel-toggle');
 DOM.btnShowPopup = document.querySelector('.panel-code');
 DOM.btnBgColorClear = document.querySelector('.panel-bg-color-clear');
 DOM.btnClearAll = document.querySelector(".panel-clear-all");
+DOM.btnHelp = document.querySelector(".panel-help");
+DOM.popupHelp = document.querySelector("#popupHelp");
+DOM.popupCode = document.querySelector("#popupCode");
+DOM.finalCode = document.querySelector("#finalCode");
 
 /**
  * generuje cały panel (wszystkie rzędy)
@@ -44,7 +48,7 @@ function generatePanelRow(gradient) {
 
     div.innerHTML = `
         <div class="panel-input-group panel-input-group-0">
-            <div class="panel-color" style="background-color: ${color}"><span>${gradient.nr + 1}</span></div>
+            <div class="panel-color" style="background-color: ${color}"><span>${gradient.nr}</span></div>
         </div>
         <div class="panel-input-group panel-input-group-1">
             <span class="panel-label">x</span>
@@ -67,9 +71,9 @@ function generatePanelRow(gradient) {
             <input class="panel-input-blur" data-key="blur" type="range" min="0" max="100" value="${gradient.blur}" />
         </div>
         <div class="panel-input-group panel-input-group-buttons panel-input-5">
-            <button class="panel-row-up">up</button>
-            <button class="panel-row-down">down</button>
-            <button class="panel-row-delete">x</button>
+            <button class="btn-up panel-row-up">up</button>
+            <button class="btn-down panel-row-down">down</button>
+            <button class="btn-delete panel-row-delete">x</button>
         </div>
     </div>
     `;
@@ -319,12 +323,17 @@ DOM.btnShowPopup.addEventListener('click', () => {
             storage.getCurrentBgColor()
         )};`;
     }
-    popup.showPopup(bg);
+    DOM.finalCode.innerHTML = bg;
+    popup.showPopup(DOM.popupCode);
 });
 
 DOM.btnBgColorClear.addEventListener('click', () => {
     storage.setBgColor('transparent');
 });
+
+DOM.btnHelp.addEventListener("click", () => {
+    popup.showPopup(DOM.popupHelp);
+})
 
 DOM.btnClearAll.addEventListener("click", () => {
     if (confirm("Clear all current work?")) {

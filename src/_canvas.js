@@ -7,7 +7,6 @@ let drag = false;
 let dragElement = null;
 
 const DOM = {};
-DOM.dotsToggle = document.querySelector('.panel-toggle-dots');
 DOM.canvasCnt = document.querySelector('.canvas');
 DOM.canvas = document.querySelector('.canvas-inside');
 
@@ -117,11 +116,6 @@ DOM.canvas.addEventListener('mousemove', (e) => {
         setCanvasBg();
         panel.fillPanelRow(gradient);
     }
-});
-
-DOM.dotsToggle.addEventListener('click', (e) => {
-    DOM.canvas.classList.toggle('canvas-dots-hide');
-    e.target.classList.toggle('is-active');
 });
 
 //nasłuchiwanie zmiany rozmiarów płótna

@@ -4,46 +4,83 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funky Gradient generator</title>
+    <title>Radial gradient generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <script src="./src/app.js" type="module"></script>
 </head>
 <body>
     <div class="panel">
         <div class="panel-header">
-            <button class="panel-code" title="Show code">Show code</button>
-            <button class="panel-toggle-dots" hidden>Toggle dots</button>
+            <button class="btn-code panel-code" title="Show code">Show code</button>
+            <button class="btn-help panel-help">Help</button>
         </div>
         <div class="panel-row panel-row-color">
-            <div class="panel-color panel-bg-color" title="Set bg color"><span>bg</span><b></b></div>
-            <button class="panel-bg-color-clear" hidden title="Remove bg color">Make transparent</button>
+            <div class="btn-color-select panel-color panel-bg-color" title="Set bg color"><span>bg</span><b></b></div>
+            <button class="bg-color-clear panel-bg-color-clear" hidden title="Remove bg color">Make transparent</button>
         </div>
         <div class="panel-row-add">
-            <button class="panel-add" id="panelAdd">Add gradient</button>
-            <button class="panel-toggle" hidden title="Show/hide panel">Toggle panel</button>
+            <button class="btn-add panel-add" id="panelAdd">Add gradient</button>
+            <button class="btn-toggle panel-toggle" hidden title="Show/hide panel">Toggle panel</button>
         </div>
         <div class="panel-list">
         </div>
-        <button class="panel-clear-all" hidden title="Clear all work">Clear all</button>
+        <button class="btn-clear-all panel-clear-all" hidden title="Clear all work">Clear all</button>
     </div>
 
     <div class="canvas">
         <div class="canvas-inside"></div>
     </div>
 
-
     <div class="library">
-        <button class="btn-show-library" title="Show library">Show library</button>
+        <button class="btn-show-library library-show-btn" title="Show library">Show library</button>
         <button class="library-btn-save" title="Save current work do local library">Save current work to local library</button>
         <div class="library-list"></div>
     </div>
 
-    <div class="popup">
+    <div class="popup" id="popupCode">
         <div class="popup-container">
             <div class="popup-close" title="Close popup">Close</div>
-            <div class="popup-code"></div>
+            <div class="popup-code" id="finalCode"></div>
             <div class="popup-footer">
-                <button class="popup-btn">Copy to clipboard</button>
+                <button class="popup-btn" id="copyToClipboard">Copy to clipboard</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="popupHelp">
+        <div class="popup-container">
+            <div class="popup-close" title="Close popup">Close</div>
+            <div class="popup-content">
+                <h3>Radial gradient generator</h3>
+                <p>
+                On the left you have a panel with several buttons.
+                </p>
+                <p>
+                    <span class="btn-code"></span> - this button will show you the generated code of your gradient
+                </p>
+                <p>
+                    <span class="btn-color-select transparent-color"><span>bg</span></span> - click on this button to set the background color
+                </p>
+                <p>
+                    <span class="btn-add"></span> - click on this button to add new gradient do canvas
+                </p>
+                <p>
+                    After adding at least one gradient, you will be able to clear canvas by clicking on the <span class="btn-clear-all"></span> button
+                </p>
+                <p>
+                    On the right side you have a button <span class="btn-show-library"></span>
+                    It shows a library with saved gradients. You can save your current work in it, but also load previously saved gradients from it.
+                </p>
+                <p>
+                    You can resize the canvas you are working on. To do this grab its bottom right corner. Saving the gradient to the library will save it along with the size of the canvas.
+                </p>
+
+                <hr>
+
+                Created by <a href="https://domanart.pl">Marcin Domański</a>
             </div>
         </div>
     </div>
