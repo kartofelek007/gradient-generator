@@ -16,7 +16,9 @@ async function saveCanvasToPng() {
     const leadZero = (i) => `${i}`.padStart(2, "0");
 
     try {
-        const canvas = await html2canvas(DOM.canvasBg);
+        const canvas = await html2canvas(DOM.canvasBg, {
+            backgroundColor: storage.current.bgColor
+        });
         const link = document.createElement("a");
         document.body.append(link);
         const date = new Date();
