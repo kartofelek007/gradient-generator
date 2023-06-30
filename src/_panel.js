@@ -230,12 +230,12 @@ DOM.panel.addEventListener('click', (e) => {
             const temp = {...g[index - 1]};
             g[index - 1] = {...g[index]};
             g[index] = temp;
-            console.log(g);
 
             Flip.from(state, {duration: 0.2});
 
             storage.recalculateGradientsNumbers();
             canvas.setCanvasBg();
+            canvas.generateDots();
         }
     }
 
@@ -256,12 +256,12 @@ DOM.panel.addEventListener('click', (e) => {
             const temp = {...g[index]};
             g[index] = {...g[index + 1]};
             g[index + 1] = temp;
-            console.log(g);
 
             Flip.from(state, {duration: 0.2});
 
             storage.recalculateGradientsNumbers();
             canvas.setCanvasBg();
+            canvas.generateDots();
         }
     }
 

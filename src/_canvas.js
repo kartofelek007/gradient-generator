@@ -56,7 +56,7 @@ function deleteDot(nr) {
     gradient.elements.dot.remove();
 }
 
-DOM.canvas.addEventListener('mouseup', (e) => {
+DOM.canvas.addEventListener('mouseup', () => {
     drag = false;
     panel.unselectActiveRow()
 

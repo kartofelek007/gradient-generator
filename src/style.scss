@@ -109,12 +109,13 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     font-family: sans-serif;
-    background: #000;
+    background: linear-gradient(to bottom, #333, #000);
     color: #fff;
     font-size: 10px;
     font-weight: bold;
     cursor: move;
     display: flex;
+    box-shadow: 0 0 0 1px rgba(#fff, 0.3);
     justify-content: center;
     align-items: center;
 }
@@ -125,7 +126,7 @@ body {
 }
 
 .canvas-dot-selected {
-    box-shadow: 0 0px 0px 2px #fff;
+    box-shadow: 0 0 0 2px #fff;
 }
 
 .canvas-dots-hide {
