@@ -222,23 +222,8 @@ DOM.placeBgColor.addEventListener('click', (e) => {
 DOM.panel.addEventListener('click', (e) => {
     //uwaga - tablica w panelu jest odwrocona dla lepszej wizualizacji
     //wiec jezeli klikam w dol to przenosze w kierunku poczatku tablicy
-    const btn = e.target.closest('.panel-row-solid');
-    if (btn) {
-        const row = btn.closest('.panel-row');
-        const nr = +row.dataset.nr;
-        const gradient = storage.current.gradients.find((el) => el.nr === nr);
-        if (gradient === null) return;
-        gradient.solid = !gradient.solid;
-        btn.classList.toggle('is-active', gradient.solid);
-        canvas.setCanvasBg();
-    }
-});
-
-DOM.panel.addEventListener('click', (e) => {
-    //uwaga - tablica w panelu jest odwrocona dla lepszej wizualizacji
-    //wiec jezeli klikam w dol to przenosze w kierunku poczatku tablicy
     {
-        const btn = e.target.closest('.panel-row-down');
+        const btn = e.target.closest('.panel-btn-row-down');
         if (btn) {
             const rows = DOM.panel.querySelectorAll(".panel-row");
             const state = Flip.getState(rows);
@@ -264,7 +249,7 @@ DOM.panel.addEventListener('click', (e) => {
     }
 
     {
-        const btn = e.target.closest('.panel-row-up');
+        const btn = e.target.closest('.panel-btn-row-up');
         if (btn) {
             const rows = DOM.panel.querySelectorAll(".panel-row");
             const state = Flip.getState(rows);

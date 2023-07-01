@@ -96,12 +96,12 @@
     pointer-events: all;
 }
 
-.panel-row:first-child .panel-row-up {
+.panel-row:first-child .panel-btn-row-up {
     opacity: 0.2;
     pointer-events: none;
 }
 
-.panel-row:last-child .panel-row-down {
+.panel-row:last-child .panel-btn-row-down {
     opacity: 0.2;
     pointer-events: none;
 }
