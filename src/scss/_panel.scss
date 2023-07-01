@@ -66,7 +66,8 @@
     color: rgba(#000, 0.8);
     pointer-events: none;
     font-size: 12px;
-    text-shadow: 0 0 1px rgba(#fff, 0.5);
+    font-weight: 700;
+    text-shadow: 0 0 1px rgba(#fff, 0.8), 0 0 2px rgba(#fff, 0.5), 0 0 2px rgba(#fff, 0.5);
 }
 
 .panel-input {

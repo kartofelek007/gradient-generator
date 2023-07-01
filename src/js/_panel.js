@@ -275,7 +275,7 @@ DOM.panel.addEventListener('click', (e) => {
     }
 
     {
-        const del = e.target.closest('.panel-row-delete');
+        const del = e.target.closest('.panel-btn-row-delete');
         if (del) {
             const rows = DOM.panel.querySelectorAll(".panel-row");
             const state = Flip.getState(rows);
