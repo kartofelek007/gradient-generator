@@ -20,8 +20,8 @@ class EventObserver {
 }
 
 export const events = {
+    addNewGradient: new EventObserver(),
     deleteGradient: new EventObserver(),
     setBg: new EventObserver(),
-    addNewGradient: new EventObserver(),
     clearAllWork: new EventObserver(),
 };

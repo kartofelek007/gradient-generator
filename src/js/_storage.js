@@ -42,7 +42,7 @@ function generateNewGradientObj() {
         x: 50,
         y: 50,
         color: {
-            h: Math.random() * 360,
+            h: Math.round(Math.random() * 360),
             s: 100,
             l: 60,
         },
